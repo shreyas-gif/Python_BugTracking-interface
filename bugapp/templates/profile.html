@@ -1,0 +1,109 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block body %}
+
+<main id="main">
+    <!-- ======= Contact Section ======= -->
+    <section id="login" class="contact">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Update My Profile</h2>
+          <h3><span>My Profile</span></h3>
+<!--          <p>Add New Project - Poetry - Stories. Share your words with the world.</p>-->
+        </div>
+
+        <div class="row" data-aos="fade-up" data-aos-delay="100">
+
+          <div class="col-6-lg-12">
+            <form action="" method="post" role="form" class="php-email-form" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="row">
+
+                <div class="form-group">
+                  <label>Select User Role</label>
+                  <select name="userrole" class="form-control" id="userrole" required>
+                        <option value="">Select User Role</option>
+                        {% for i in userrole %}
+                        <option value="{{i.0}}" {% if data.userrole == i.0 %}selected{% endif %}>{{i.1}}</option>
+                        {% endfor %}
+                  </select>
+               </div>
+                  <hr>
+
+                <div class="form-group col-6">
+                  <label>User Name</label>
+                  <input type="text" name="user_name" class="form-control" id="user_name" value="{{data.user.username}}" readonly placeholder="User Name" required>
+                </div>
+
+<!--                <div class="form-group col-6">-->
+<!--                  <label>Password</label>-->
+<!--                  <input type="password" name="password" class="form-control" id="password" placeholder="Password" required>-->
+<!--                </div>-->
+
+<!--                <div class="form-group">-->
+<!--                    <label>Confirm Password</label>-->
+<!--                    <input type="password" name="confirm" class="form-control" id="confirm" placeholder="Confirm Password" required>-->
+<!--                </div>-->
+
+                <div class="form-group col-6">
+                    <label>First Name</label>
+                  <input type="text" class="form-control" name="first_name" value="{{data.user.first_name}}" id="first_name" placeholder="First Name" required>
+                </div>
+
+                <div class="form-group col-6">
+                  <label>Last Name</label>
+                  <input type="text" class="form-control" name="last_name"  value="{{data.user.last_name}}" id="last_name" placeholder="Last Name" required>
+                </div>
+
+                <div class="form-group col-6">
+                  <label>Phone Number</label>
+                  <input type="text" class="form-control" name="phone_number" id="phone_number" value="{{data.contact}}" placeholder="Phone number" required>
+                </div>
+
+                <div class="form-group col-6">
+                  <label>Email Id</label>
+                  <input type="email" class="form-control" name="email" id="email" value="{{data.user.email}}" placeholder="Email Id" required>
+                </div>
+
+               <div class="form-group col-6">
+                  <label>Gender</label>
+                  <select name="gender" class="form-control" id="gender" required>
+                        <option value="">Select Gender</option>
+                        <option value="Male" {% if data.gender == "Male" %}selected{% endif %}>Male</option>
+                        <option value="Female" {% if data.gender == "Female" %}selected{% endif %}> Female</option>
+                  </select>
+               </div>
+
+                <div class="form-group col-6">
+                  <label>Date of Birth</label>
+                  <input type="date" class="form-control" name="dob" id="dob" value="{{data.dob|date:'Y-m-d'}}" placeholder="Date of Birth" required>
+                </div>
+
+                <div class="form-group col-6">
+                  <label>Image</label>
+                  <input type="file" class="form-control" name="file" id="file"  placeholder="Choose file">
+                    <span>{{data.file}}</span>
+                </div>
+
+              <div class="form-group col-6">
+                  <label>Address</label>
+                  <textarea type="text" class="form-control" name="address" id="address" placeholder="Address" required>{{data.address}}</textarea>
+              </div>
+
+              <div class="form-group col-2">
+                  <img src="{% if data.file %} {{data.file.url}} {% else %}{% endif %}" class="form-control">
+              </div>
+              </div>
+
+              <div class="text-center"><button class="pull-right" type="submit">Submit</button></div>
+            </form>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Contact Section -->
+
+  </main><!-- End #main -->
+{% endblock %}

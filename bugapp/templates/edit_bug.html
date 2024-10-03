@@ -1,0 +1,92 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block body %}
+
+<main id="main">
+    <!-- ======= Contact Section ======= -->
+    <section id="login" class="contact">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Update Bug</h2>
+          <h3><span>Update Bug</span></h3>
+<!--          <p>Add New Bug - Poetry - Stories. Share your words with the world.</p>-->
+        </div>
+
+        <div class="row" data-aos="fade-up" data-aos-delay="100">
+
+          <div class="col-lg-12">
+            <form action="" method="post" role="form" class="php-email-form">
+              {% csrf_token %}
+              <div class="row">
+                <div class="form-group">
+                  <label>Bug Name</label>
+                  <input type="text" name="name" class="form-control" id="name" value="{{data.title}}" placeholder="Bug Name" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Project</label>
+                    <select name="project" class="form-control" id="project" required>
+                        <option value="">Select Project</option>
+                        {% for i in project %}
+                        <option value="{{i.id}}" {% if i.id == data.project.id %}selected{% endif %}>{{i.name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Tester Code</label>
+                  <input type="text" class="form-control" name="tester_code" value="{{data.tester_code}}" id="tester_code" placeholder="Tester Code" required>
+                </div>
+
+                <div class="form-group">
+                  <label>Bug Date</label>
+                  <input type="date" class="form-control" name="bug_date" id="bug_date" value="{{data.created|date:'Y-m-d'}}" placeholder="Bug Date" required>
+                </div>
+
+                <div class="form-group">
+                  <label>Bug Level</label>
+                  <input type="text" class="form-control" name="bug_level" id="bug_level" value="{{data.bug_level}}" placeholder="Bug Level" required>
+                </div>
+
+                <div class="form-group">
+                  <label>Bug Priority</label>
+                  <input type="text" class="form-control" name="bug_priority" id="bug_priority" value="{{data.priority}}" placeholder="Bug Priority" required>
+                </div>
+
+               <div class="form-group">
+                  <label>Bug Type</label>
+                  <select name="bug_type" class="form-control" id="bug_type" required>
+                        <option value="">Select Bug Type</option>
+                        {% for i in bug_type %}
+                        <option value="{{i.0}}" {% if i.0 == data.bug_type %}selected{% endif %}>{{i.1}}</option>
+                        {% endfor %}
+                  </select>
+               </div>
+
+              <div class="form-group">
+                  <label>Status Name</label>
+                  <select name="status_name" class="form-control" id="status_name" required>
+                        <option value="">Select Status Name</option>
+                        {% for i in bug_status %}
+                            <option value="{{i.0}}" {% if i.0 == data.status %}selected{% endif %}>{{i.1}}</option>
+                        {% endfor %}
+                  </select>
+               </div>
+
+              <div class="form-group">
+                  <label>Description</label>
+                  <textarea type="text" class="form-control" name="description" id="description" placeholder="Bug Description" required>{{data.description}}</textarea>
+              </div>
+              </div>
+
+              <div class="text-center"><button type="submit">Submit</button></div>
+            </form>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Contact Section -->
+
+  </main><!-- End #main -->
+{% endblock %}

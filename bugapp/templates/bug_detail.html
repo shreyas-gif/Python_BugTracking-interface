@@ -1,0 +1,85 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block body %}
+
+<main id="main" data-aos="fade-up">
+
+    <!-- ======= Breadcrumbs Section ======= -->
+    <section class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Bug Details</h2>
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="portfolio.html">Bug</a></li>
+            <li>Bug Details</li>
+          </ol>
+        </div>
+
+      </div>
+    </section><!-- Breadcrumbs Section -->
+
+    <!-- ======= Portfolio Details Section ======= -->
+    <section id="portfolio-details" class="portfolio-details">
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-12">
+            <div class="portfolio-info">
+              <h3>Bug information</h3>
+              <ul>
+                <li><strong>Bug Title</strong>: {{data.title}}</li>
+                <li><strong>UserEmail</strong>: {{data.creator.user.email}}</li>
+                <li><strong>BUg Status date</strong>: {{data.get_status_display}}</li>
+                <li><strong>Raise by</strong>: {{data.raise_by}}</li>
+                <li><strong>Bug Type</strong>: {{data.get_bug_type_display}}</li>
+              </ul>
+            </div><hr>
+            <div class="portfolio-description">
+              <h2>Add Comment</h2>
+              <div class="col-lg-12">
+            <form action="" method="post" role="form" class="php-email-form">
+{% csrf_token %}
+                <div class="row">
+                    <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" class="form-control" name="title" id="title" placeholder="Subject" required>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea class="form-control" name="description" rows="5" placeholder="Message" required></textarea>
+                    </div>
+                </div>
+
+              <div class="text-center"><button class="btn btn-primary pull-right" type="submit">Send Message</button></div>
+            </form>
+          </div>
+            </div>
+          </div>
+
+        </div><hr>
+          <h2>All Comment</h2>
+          {% for i in comment %}
+              <div  class="row gy-8" style="border:1px solid lightgray;padding:6px">
+                  <div class="row" >
+                      <div class="col-1">
+                        <img class="card-img" src="{{i.user.file.url}}" alt="Card image"/>
+                      </div>
+                      <div class="col-6">
+                        <div class="card-body-right">
+                          <h5 class="card-title">{{i.title}}</h5><hr>
+                          <p class="card-text">{{i.message}}</p>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+         {% endfor %}
+
+      </div>
+    </section><!-- End Portfolio Details Section -->
+
+  </main>
+
+{% endblock %}
